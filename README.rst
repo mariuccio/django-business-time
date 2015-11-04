@@ -22,6 +22,6 @@ from business-time import business_timedelta
 
 
 install with
-
+pip install git+https://github.com/mariuccio/django-business-time.git
 
 
