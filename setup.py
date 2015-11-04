@@ -10,7 +10,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 setup(
     name='django-business-time',
     version='0.1',
-    packages=['business-time'],
+    packages=['business_time'],
     include_package_data=True,
     license='BSD License',  # example license
     description='An application to calculate business timedelta',
