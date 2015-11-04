@@ -12,6 +12,7 @@ WORK_ON_SATURDAY=False
 You can specify also a list of `datetime.date` named `HOLIDAYS` and a list of `datetime.time` named `BUSINESS_DAILY_TIME`
 
 `BUSINESS_DAILY_TIME` must have 4 items:
+
 * The start time (default = 9)
 * The start break time (default = 12)
 * The stop break time (default = 13)
@@ -19,15 +20,18 @@ You can specify also a list of `datetime.date` named `HOLIDAYS` and a list of `d
 
 
 use as:
-`
-from business_time import business_time
+.. code-block:: python
 
-business_time.business_timedelta(dt1,dt2)
-`
+  from business_time import business_time
+
+  business_time.business_timedelta(dt1,dt2)
+
 where `dt1` and `dt2` are 2 `datetime.datetime` objects
 
 install with
-`
-pip install git+https://github.com/mariuccio/django-business-time.git
-`
+
+.. code-block:: bash
+
+  pip install git+https://github.com/mariuccio/django-business-time.git
+
 
