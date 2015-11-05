@@ -152,5 +152,6 @@ def business_days_between(dt1,dt2):
     return business_days
 
 
-def timedelta_to_time(t1,t2):
-    return (datetime.min + (t1 - t2)).time()
+def timedelta_to_time(dt1,dt2):
+    # HACK datetime.min is 00-00-00T00:00:00:0000
+    return (datetime.min + (dt1 - dt2)).time()
