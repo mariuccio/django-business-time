@@ -145,7 +145,9 @@ def business_days_between(dt1,dt2):
     dt_iterator = dt1 + t
     business_days = 0
     while dt_iterator.date() < dt2.date():
-        if not is_holiday(dt_iterator) and not (is_saturday(dt_iterator) and not WORK_ON_SATURDAY) and not is_sunday(dt_iterator):
+        if not is_holiday(dt_iterator) \
+                and not (is_saturday(dt_iterator) and not WORK_ON_SATURDAY) \
+                and not is_sunday(dt_iterator):
             business_days += 1
         dt_iterator += t
 
