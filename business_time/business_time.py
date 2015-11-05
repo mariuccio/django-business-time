@@ -71,11 +71,11 @@ def convert_datetime(dt):
 
     # If during morning work time
     elif BUSINESS_DAILY_TIME[0] <= dt.time() < BUSINESS_DAILY_TIME[1]:
-        dt = datetime.combine(dt.date(), timedelta_to_time(dt.time() - BUSINESS_DAILY_TIME[0]))
+        dt = datetime.combine(dt.date(), timedelta_to_time(dt.time(),BUSINESS_DAILY_TIME[0]))
 
     # If during lunch time
     elif BUSINESS_DAILY_TIME[1] <= dt.time() < BUSINESS_DAILY_TIME[2]:
-        dt = datetime.combine(dt.date(), timedelta_to_time(BUSINESS_DAILY_TIME[1] - BUSINESS_DAILY_TIME[0]))
+        dt = datetime.combine(dt.date(), timedelta_to_time(BUSINESS_DAILY_TIME[1],BUSINESS_DAILY_TIME[0]))
 
     # If during afternoon work time
     elif BUSINESS_DAILY_TIME[2] <= dt.time() < BUSINESS_DAILY_TIME[3]:
