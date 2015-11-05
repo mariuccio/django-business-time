@@ -8,6 +8,7 @@ In your `settings.py` file you can specify the flag
 
 .. code-block:: python
     WORK_ON_SATURDAY=False
+Because several companies are working also on saturday :(
 
 You can specify also a list of `datetime.date` named `HOLIDAYS` and a list of `datetime.time` named `BUSINESS_DAILY_TIME`
 
