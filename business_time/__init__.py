@@ -99,7 +99,6 @@ def convert_datetime(dt):
     return dt
 
 
-
 def business_timedelta(dt1, dt2):
     """
     it calculates the business time difference between 2 datetime entities
@@ -115,14 +114,17 @@ def business_timedelta(dt1, dt2):
     else:
         return timedelta(0,0,0,0,0,0,0)
 
+
 def business_time_after(dt):
     """
     business hours after dt in the same date
     """
     if is_holiday(dt) or is_saturday(dt) or is_sunday(dt):
         return timedelta(0)
-    dt_end = datetime.combine(dt.date(),convert_datetime(datetime.combine(datetime.min.date(), BUSINESS_DAILY_TIME[3])).time())
+    dt_end_converted = convert_datetime(datetime.combine(datetime.min.date(), BUSINESS_DAILY_TIME[3]))
+    dt_end = datetime.combine(dt.date(),dt_end_converted.time())
     return dt_end - dt
+
 
 def business_time_before(dt):
     """
@@ -130,8 +132,10 @@ def business_time_before(dt):
     """
     if is_holiday(dt) or is_saturday(dt) or is_sunday(dt):
         return timedelta(0)
-    dt_start = datetime.combine(dt.date(),convert_datetime(datetime.combine(datetime.min.date(), BUSINESS_DAILY_TIME[0])).time())
+    dt_start_converted = convert_datetime(datetime.combine(datetime.min.date(), BUSINESS_DAILY_TIME[0]))
+    dt_start = datetime.combine(dt.date(),dt_start_converted.time())
     return dt - dt_start
+
 
 def business_days_between(dt1,dt2):
     """
