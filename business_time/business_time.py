@@ -7,29 +7,29 @@ else:
     WORK_ON_SATURDAY = False
 
 if hasattr(settings, 'HOLIDAYS'):
-    HOLIDAYS = None
+    HOLIDAYS = []
     for holiday in settings.HOLIDAYS:
         HOLIDAYS.append(date(holiday))
 else:
-    HOLIDAYS = (
+    HOLIDAYS = [
         date(2015,12,25),
         date(2016,1,1)
-    )
+    ]
 
 if hasattr(settings, 'BUSINESS_DAILY_TIME'):
-    BUSINESS_DAILY_TIME = (
+    BUSINESS_DAILY_TIME = [
         time(settings.BUSINESS_DAILY_TIME[0]),
         time(settings.BUSINESS_DAILY_TIME[1]),
         time(settings.BUSINESS_DAILY_TIME[2]),
         time(settings.BUSINESS_DAILY_TIME[3])
-    )
+    ]
 else:
-    BUSINESS_DAILY_TIME = (
+    BUSINESS_DAILY_TIME = [
         time(9),
         time(12),
         time(12),
         time(17),
-    )
+    ]
 
 MORNING_TIMEDELTA = datetime.combine(datetime.min.date(), BUSINESS_DAILY_TIME[1]) - datetime.combine(datetime.min.date(), BUSINESS_DAILY_TIME[0])
 AFTERNOON_TIMEDELTA = datetime.combine(datetime.min.date(), BUSINESS_DAILY_TIME[3]) - datetime.combine(datetime.min.date(), BUSINESS_DAILY_TIME[2])
