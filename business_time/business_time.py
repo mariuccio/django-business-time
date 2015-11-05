@@ -7,14 +7,14 @@ else:
     WORK_ON_SATURDAY = False
 
 if hasattr(settings, 'HOLIDAYS'):
-    HOLIDAYS = []
+    HOLIDAYS = ()
     for holiday in settings.HOLIDAYS:
-        HOLIDAYS.append(date(holiday[0],holiday[1],holiday[2]))
+        HOLIDAYS = HOLIDAYS + (date(holiday[0],holiday[1],holiday[2]))
 else:
-    HOLIDAYS = [
+    HOLIDAYS = (
         date(2015,12,25),
         date(2016,1,1)
-    ]
+    )
 
 if hasattr(settings, 'BUSINESS_DAILY_TIME'):
     BUSINESS_DAILY_TIME = (
@@ -39,8 +39,12 @@ BUSINESS_DAILY_TIMEDELTA = MORNING_TIMEDELTA + AFTERNOON_TIMEDELTA
 
 
 def is_holiday(dt):
-    if dt.date() in HOLIDAYS: return True
-    else: return False
+    i = 0
+    while i < len(HOLIDAYS):
+        if datetime.combine(dt.date(), datetime.min.time()) == datetime.combine(HOLIDAYS[i], datetime.min.time()):
+            return True
+        i += 1
+    return False
 
 
 def is_saturday(dt):
