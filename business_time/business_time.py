@@ -7,14 +7,14 @@ else:
     WORK_ON_SATURDAY = False
 
 if hasattr(settings, 'HOLIDAYS'):
-    HOLIDAYS = ()
+    HOLIDAYS = []
     for holiday in settings.HOLIDAYS:
-        HOLIDAYS = HOLIDAYS + (date(holiday[0],holiday[1],holiday[2]),)
+        HOLIDAYS.append(datetime.combine(date(holiday[0], holiday[1], holiday[2]), datetime.min.time()))
 else:
-    HOLIDAYS = (
-        date(2015,12,25),
-        date(2016,1,1)
-    )
+    HOLIDAYS = [
+        datetime.combine(date(2015,12,25), datetime.min.time()),
+        datetime.combine(date(2016,1,1), datetime.min.time()),
+    ]
 
 if hasattr(settings, 'BUSINESS_DAILY_TIME'):
     BUSINESS_DAILY_TIME = (
@@ -39,12 +39,10 @@ BUSINESS_DAILY_TIMEDELTA = MORNING_TIMEDELTA + AFTERNOON_TIMEDELTA
 
 
 def is_holiday(dt):
-    i = 0
-    while i < len(HOLIDAYS):
-        if datetime.combine(dt.date(), datetime.min.time()) == datetime.combine(HOLIDAYS[i], datetime.min.time()):
-            return True
-        i += 1
-    return False
+    if datetime.combine(dt.date(), datetime.min.time()) in HOLIDAYS:
+        return True
+    else:
+        return False
 
 
 def is_saturday(dt):
@@ -58,6 +56,16 @@ def is_sunday(dt):
 
 
 def convert_datetime(dt):
+    """
+    It converts the real time to the chosen daily model
+    For example:
+        if we have 9-17 with lunch break 12-13
+        it will convert 9 to 0 and 17 to 7
+        then all the times before 9 to 0 and all after 17 to 7
+        then the times between 12-13 to 3
+        then the times inside the business interval to the correspondent in the new model
+            for example 10:30 to 01:30 and 14:30 to 04:30
+    """
 
     # HACK: to make math with times we need to convert them in datetimes
     dtbdt = datetime.combine(datetime.min.date(), dt.time())
@@ -91,8 +99,12 @@ def convert_datetime(dt):
     return dt
 
 
-# it calculates the business time difference between 2 datetime entities
+
 def business_timedelta(dt1, dt2):
+    """
+    it calculates the business time difference between 2 datetime entities
+    """
+
     if dt2 > dt1:
         dt1 = convert_datetime(dt1)
         dt2 = convert_datetime(dt2)
@@ -103,19 +115,28 @@ def business_timedelta(dt1, dt2):
     else:
         return timedelta(0,0,0,0,0,0,0)
 
-
 def business_time_after(dt):
-    dt_end = datetime.combine(dt.date(),BUSINESS_DAILY_TIME[3])
+    """
+    business hours after dt in the same date
+    """
+    if is_holiday(dt) or is_saturday(dt) or is_sunday(dt):
+        return timedelta(0)
+    dt_end = datetime.combine(dt.date(),convert_datetime(datetime.combine(datetime.min.date(), BUSINESS_DAILY_TIME[3])).time())
     return dt_end - dt
 
-
 def business_time_before(dt):
-    dt_start = datetime.combine(dt.date(),BUSINESS_DAILY_TIME[0])
+    """
+    business hours before dt in the same date
+    """
+    if is_holiday(dt) or is_saturday(dt) or is_sunday(dt):
+        return timedelta(0)
+    dt_start = datetime.combine(dt.date(),convert_datetime(datetime.combine(datetime.min.date(), BUSINESS_DAILY_TIME[0])).time())
     return dt - dt_start
 
-
 def business_days_between(dt1,dt2):
-
+    """
+    business days between two dts exluding the first and the last
+    """
     t = timedelta(days=1)
     dtiterator = dt1 + t
     business_days = 0
