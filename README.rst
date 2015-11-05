@@ -23,11 +23,11 @@ You can specify also a list of `datetime.date` named `HOLIDAYS` and a list of `d
 use as:
 .. code-block:: python
 
-  from business_time import business_time
+  from business_time import business_timedelta
 
-  business_time.business_timedelta(dt1,dt2)
+  business_timedelta(dt1,dt2)
 
-where `dt1` and `dt2` are 2 `datetime.datetime` objects
+where `dt1` and `dt2` are 2 `datetime.datetime` objects and `dt2 >= dt1`
 
 install with
 
