@@ -39,7 +39,6 @@ and then in your settings.py:
 
 .. code-block:: python
     INSTALLED_APPS = (
-
         ...
 
         'business_time',
