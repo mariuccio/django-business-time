@@ -9,7 +9,7 @@ else:
 if hasattr(settings, 'HOLIDAYS'):
     HOLIDAYS = []
     for holiday in settings.HOLIDAYS:
-        HOLIDAYS.append(date(holiday))
+        HOLIDAYS.append(date(holiday[0],holiday[1],holiday[2]))
 else:
     HOLIDAYS = [
         date(2015,12,25),
