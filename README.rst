@@ -51,12 +51,7 @@ an example of settings to put in your settings.py can be:
 
     WORK_ON_SATURDAY = False
 
-    BUSINESS_DAILY_TIME = [
-        9,
-        12,
-        13,
-        17
-    ]
+    BUSINESS_DAILY_TIME = [9, 12, 13, 17]
 
     HOLIDAYS = [
 
@@ -69,9 +64,4 @@ an example of settings to put in your settings.py can be:
 If we don't want the lunch break we can put BUSINESS_DAILY_TIME[1]==BUSINESS_DAILY_TIME[2], for example:
 .. code-block:: python
 
-    BUSINESS_DAILY_TIME = [
-        9,
-        12,
-        12,
-        17
-    ]
+    BUSINESS_DAILY_TIME = [9, 12, 12, 17]
