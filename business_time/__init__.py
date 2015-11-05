@@ -101,7 +101,8 @@ def convert_datetime(dt):
 
 def business_timedelta(dt1, dt2):
     """
-    it calculates the business time difference between 2 datetime entities
+    It calculates the business time difference between 2 datetime objects
+    dt2 >= dt1 in input or the result will be always 0
     """
 
     if dt2 > dt1:
@@ -117,7 +118,7 @@ def business_timedelta(dt1, dt2):
 
 def business_time_after(dt):
     """
-    business hours after dt in the same date
+    Business hours after a datetime object in the same date
     """
     if is_holiday(dt) or is_saturday(dt) or is_sunday(dt):
         return timedelta(0)
@@ -128,7 +129,7 @@ def business_time_after(dt):
 
 def business_time_before(dt):
     """
-    business hours before dt in the same date
+    Business hours before a datetime object in the same date
     """
     if is_holiday(dt) or is_saturday(dt) or is_sunday(dt):
         return timedelta(0)
@@ -139,7 +140,7 @@ def business_time_before(dt):
 
 def business_days_between(dt1,dt2):
     """
-    business days between two dts excluding the first and the last
+    Business days between two datetime objects excluding the first and the last
     """
     t = timedelta(days=1)
     dt_iterator = dt1 + t
