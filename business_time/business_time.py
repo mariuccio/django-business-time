@@ -7,7 +7,9 @@ else:
     WORK_ON_SATURDAY = False
 
 if hasattr(settings, 'HOLIDAYS'):
-    HOLIDAYS = settings.HOLIDAYS
+    HOLIDAYS = None
+    for holiday in settings.HOLIDAYS:
+        HOLIDAYS.append(date(holiday))
 else:
     HOLIDAYS = (
         date(2015,12,25),
