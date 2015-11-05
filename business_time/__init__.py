@@ -139,7 +139,7 @@ def business_time_before(dt):
 
 def business_days_between(dt1,dt2):
     """
-    business days between two dts exluding the first and the last
+    business days between two dts excluding the first and the last
     """
     t = timedelta(days=1)
     dt_iterator = dt1 + t
