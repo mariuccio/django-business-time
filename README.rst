@@ -59,8 +59,11 @@ an example of settings to put in your settings.py can be:
     ]
 
     HOLIDAYS = [
+
         [2015, 1, 1], # New Year's Day
+
         [2015, 12, 25], # Christmas Day
+
     ]
 
 If we don't want the lunch break we can put BUSINESS_DAILY_TIME[1]==BUSINESS_DAILY_TIME[2], for example:
