@@ -13,7 +13,7 @@ setup(
     packages=['business_time'],
     include_package_data=True,
     license='BSD License',  # example license
-    description='An application to calculate business timedelta',
+    description='A Django application to calculate business timedelta',
     long_description=README,
     url='',
     author='Mario Taddei',
