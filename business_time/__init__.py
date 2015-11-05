@@ -142,12 +142,12 @@ def business_days_between(dt1,dt2):
     business days between two dts exluding the first and the last
     """
     t = timedelta(days=1)
-    dtiterator = dt1 + t
+    dt_iterator = dt1 + t
     business_days = 0
-    while dtiterator.date() < dt2.date():
-        if not is_holiday(datetime.combine(dtiterator.date(), datetime.min.time())) and not (is_saturday(dtiterator) and not WORK_ON_SATURDAY) and not is_sunday(dtiterator):
+    while dt_iterator.date() < dt2.date():
+        if not is_holiday(dt_iterator) and not (is_saturday(dt_iterator) and not WORK_ON_SATURDAY) and not is_sunday(dt_iterator):
             business_days += 1
-        dtiterator += t
+        dt_iterator += t
 
     return business_days
 
