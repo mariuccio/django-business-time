@@ -48,6 +48,7 @@ and then in your settings.py:
     )
 
 an example of settings to put in your settings.py can be:
+
 .. code-block:: python
 
     WORK_ON_SATURDAY = False
